@@ -6,14 +6,76 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 </head>
 <body>
-    Как сделать счётчик?
-    <script>
+<div class="swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <!-- Add more slides as needed -->
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-scrollbar"></div>
+</div>
 
-    </script>
-    <style>
+<!-- Slide counter -->
+<div id="slide-counter"></div>
 
-    </style>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
+
+    function updateSlideCounter(swiper) {
+        const slideCounter = document.getElementById('slide-counter');
+        slideCounter.textContent = `Slide ${swiper.realIndex + 1} of ${swiper.slides.length - 2}`;
+    }
+
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        on: {
+            slideChange: function() {
+                updateSlideCounter(this);
+            },
+        },
+    });
+
+    // Initial call to set the slide counter after swiper initialization
+    updateSlideCounter(swiper);
+</script>
+<style>
+    .swiper {
+        width: 600px;
+        height: 300px;
+    }
+    .swiper-slide {
+        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: white;
+    }
+    #slide-counter {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+</style>
 </body>
-</html>
+</
